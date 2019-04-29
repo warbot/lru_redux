@@ -34,10 +34,10 @@ module LruRedux
         ttl_evict
       end
 
-      def getset(key)
+      def getset(key, &block)
         ttl_evict
 
-        @cache.getset(key)
+        result = @cache.getset(key, &block)
         @data_ttl[key] = Time.now.to_f
 
         if @cache.count > @max_size
