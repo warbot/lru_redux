@@ -49,10 +49,10 @@ module LruRedux
         result
       end
 
-      def fetch(key)
+      def fetch(key, &block)
         ttl_evict
 
-        @cache.fetch(key)
+        @cache.fetch(key, &block)
       end
 
       def [](key)
